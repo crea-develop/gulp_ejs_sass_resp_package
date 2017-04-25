@@ -1,0 +1,19 @@
+{
+    "common" : {
+        "site_title" : "サイトタイトル",
+        "keywords": "キーワード",
+        "description": "ディスクリプション",
+        "site_url" : "",
+        "ogp" : "ogp.png"
+    },
+    "pages" : {
+        "index" : {
+            "path" : "./",
+            "title" : "トップページ"
+        },
+        "hoge" : {
+            "path" : "../",
+            "title" : "ページタイトル"
+        }
+    }
+}

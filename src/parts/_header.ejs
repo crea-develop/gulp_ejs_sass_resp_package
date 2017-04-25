@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" content="<%=common.keywords %>" />
+    <meta name="description" content="<%=common.description %>" />
+
+    <meta property="og:title" content="<%=common.site_title %>" />
+    <meta property="og:keywords" content="<%=common.keywords %>" />
+    <meta property="og:description" content="<%=common.description %>" />
+    <meta property="og:url" content="<%=common.site_url %>" />
+    <meta property="og:image" content="<%=common.ogp %>" />
+    <meta property="og:type" content="website" />
+
+    <title><%=pages[id].title %> | <%=common.site_title %></title>
+
+    <link rel="index" href="<%=pages[id].path %>">
+
+    <script src="<%=pages[id].path %>assets/js/common.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <header class="global_header">
+            <h1><a href="<%=pages[id].path %>"><%=common.site_title %></a></h1>
+        </header>
