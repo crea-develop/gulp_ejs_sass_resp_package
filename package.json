@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/cs-kamei/gulp_ejs_sass_package#readme",
   "devDependencies": {
+    "del": "^2.2.2",
     "graceful-fs": "^4.1.11",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
