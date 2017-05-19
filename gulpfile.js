@@ -1,25 +1,29 @@
-var gulp = require('gulp');
+var gulp            = require('gulp');
 
-var ejs = require('gulp-ejs');
-var prettify = require('gulp-prettify');
+var ejs             = require('gulp-ejs');
+var prettify        = require('gulp-prettify');
 
-var imagemin = require('gulp-imagemin');
+var imagemin        = require('gulp-imagemin');
 
-var uglify = require('gulp-uglify');
+var uglify          = require('gulp-uglify');
 
 var autoprefixer    = require('gulp-autoprefixer');
 var cssbeautify     = require('gulp-cssbeautify');
 var cssmin          = require('gulp-cssmin');
 var sass            = require('gulp-sass');
 
-var changed     = require('gulp-changed');
-var concat      = require('gulp-concat');
-var rename      = require('gulp-rename');
-var plumber     = require('gulp-plumber');
-var fs          = require('graceful-fs');
-var del         = require('del');
+var changed         = require('gulp-changed');
+var concat          = require('gulp-concat');
+var rename          = require('gulp-rename');
+var plumber         = require('gulp-plumber');
+var replace         = require('gulp-replace');
+var fs              = require('graceful-fs');
+var del             = require('del');
 
 
+// =======================================================
+// 各種パスの定義
+// =======================================================
 var paths = {
     dist        : 'dist/',
     ejs        : 'src/**/*.ejs',
@@ -34,9 +38,36 @@ var paths = {
         srcnot  : '!src/**/common/*.js',
         dist    : 'dist/assets/js/'
     },
-    other : 'src/**/*.!(jpg|gif|png|php|html|scss|css|js)'
+    other : 'src/**/*.!(jpg|gif|png|php|html|scss|css|*.scss|*.css|js|*.js)',
+    release     : {
+        dist    : 'release/',
+        html    : 'dist/**/*.+(html|php)',
+        image   : 'dist/**/*.+(jpg|gif|png)',
+        js      : 'dist/**/*.js',
+        css     : 'dist/**/*.css',
+        other   : 'dist/**/*.!(html|php)'
+    }
 };
 
+// =======================================================
+// パスの書き換え設定
+// =======================================================
+// 書き換え前のパスのパターン
+var replace_path_pattern = /(\.\.\/)*assets\//g;
+// 書き換えるURL
+var replace_url = 'http://replace.url/assets/';
+
+// =======================================================
+// リリース用ファイル生成に関する設定
+// =======================================================
+// リリースファイル生成時にリプレースするテキスト
+var replace_text = '<!-- === REPLACE TEXT === -->';
+// リプレース内容の記述してあるファイルパス
+var replace_file = './_replace_text.html';
+
+// =======================================================
+// common.jsに結合するjsファイルの一覧
+// =======================================================
 var common_js_sort = [
     'src/assets/js/common/jquery-3.2.0.min.js',
     'src/assets/js/common/jquery.easing.js'
@@ -146,4 +177,33 @@ gulp.task('common_js', function() {
     .pipe(changed(paths.js.dist))
     .pipe(concat('common.js'))                // 結合
     .pipe(gulp.dest(paths.js.dist));
+});
+
+
+// リリース用ファイルの生成
+// ====================
+gulp.task('release', ['release_html', 'release_copy']);
+gulp.task('release_html', function () {
+    var text = fs.readFileSync(replace_file);
+    gulp
+    .src(paths.release.html)
+    .pipe(plumber())
+    .pipe(replace(replace_text, text))
+    .pipe(prettify())
+    .pipe(gulp.dest(paths.release.dist));
+});
+gulp.task('release_copy', function () {
+    gulp
+    .src(paths.release.other)
+    .pipe(gulp.dest(paths.release.dist));
+});
+
+
+// パスの書き換え
+// ====================
+gulp.task('release_path', function () {
+    gulp
+    .src([paths.release.html, paths.release.css, paths.release.js])
+    .pipe(replace(replace_path_pattern, replace_url))
+    .pipe(gulp.dest(paths.release.dist));
 });
