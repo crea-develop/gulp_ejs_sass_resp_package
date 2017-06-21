@@ -19,6 +19,7 @@ var plumber         = require('gulp-plumber');
 var replace         = require('gulp-replace');
 var fs              = require('graceful-fs');
 var del             = require('del');
+var browserSync     = require('browser-sync');
 
 
 // =======================================================
@@ -134,13 +135,28 @@ gulp.task('copy', function () {
     .pipe(gulp.dest(paths.dist));
 });
 
+  // オートリロードタスク
+// ====================
+gulp.task('browser-sync', function() {
+    browserSync({
+        server: {
+            baseDir: "dist/",
+            index: "index.html"
+        }
+    });
+});
+gulp.task('bs-reload', function () {
+    browserSync.reload();
+});
+
 // 監視タスク
 // ====================
-gulp.task('watch', function() {
+gulp.task('watch', ['browser-sync'], function() {
     gulp.watch(paths.ejs, ['ejs']);
     gulp.watch(paths.sass.src, ['sass']);
     gulp.watch(paths.js.src,   ['js']);
     gulp.watch(paths.other, ['copy']);
+    gulp.watch('dist/**', ['bs-reload']);
 });
 
 // 一括処理タスク
