@@ -1,6 +1,3 @@
-(function(window, $, undefined){
+(function(window, undefined){
 
-    $(function () {
-
-    });
-})(this, jQuery);
+})(this);

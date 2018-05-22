@@ -1,0 +1,16 @@
+{
+    "lang"        : "ja",
+    "site_name"   : "サイト名",
+    "author"      : "サイトの管理者",
+    "page_title"  : "ページタイトルデフォルト | サイト名",
+    "keywords"    : "キーワード,keyword",
+    "description" : "サイトの説明デフォルト",
+    "site_url"    : "https://testsample.hoge/",
+    "og"          : {
+        "image" : "https://testsample.hoge/ogp.png"
+    },
+    "twitter" : {
+        "site" : "@",
+        "card" : "summary_large_image"
+    }
+}

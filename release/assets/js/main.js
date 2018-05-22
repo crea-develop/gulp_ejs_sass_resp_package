@@ -1,1 +1,0 @@
-!function(n,u,c){u(function(){})}(0,jQuery);

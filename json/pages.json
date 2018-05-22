@@ -1,0 +1,24 @@
+{
+    "index" : {
+        "path"        : "./",
+        "pagetype"    : "Index",
+        "url"         : "",
+        "title"       : "サイト名",
+        "description" : false,
+        "og" : {
+            "type" : "website",
+            "image" : false
+        }
+    },
+    "about" : {
+        "path"        : "../",
+        "pagetype"    : "About",
+        "url"         : "about/",
+        "title"       : "ABOUT | サイト名",
+        "description" : "サイトについて",
+        "og" : {
+            "type" : "article",
+            "image" : false
+        }
+    }
+}

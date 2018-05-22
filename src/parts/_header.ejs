@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="<%=common.lang %>">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <meta name="keywords" content="<%=common.keywords %>" />
-    <meta name="description" content="<%=common.description %>" />
-
-    <meta property="og:title" content="<%=common.site_title %>" />
-    <meta property="og:keywords" content="<%=common.keywords %>" />
-    <meta property="og:description" content="<%=common.description %>" />
-    <meta property="og:url" content="<%=common.site_url %>" />
-    <meta property="og:image" content="<%=common.ogp %>" />
-    <meta property="og:type" content="website" />
-
-    <title><%=pages[id].title %> | <%=common.site_title %></title>
 
     <link rel="index" href="<%=pages[id].path %>">
 
+    <title><% if(pages[id].title) { %><%=pages[id].title %><% }else{ %><%=common.page_title %><% } %></title>
+
+    <meta name="author" content="<%=common.author %>">
+    <meta name="description" content="<% if(pages[id].description) { %><%=pages[id].description %><% }else{ %><%=common.description %><% } %>">
+    <meta name="keywords" content="<%if(pages[id].keywords){%><%=pages[id].keywords%><%}else{%><%=common.keywords %><%}%>">
+
+    <meta property="og:site_name" content="<%=common.site_name %>">
+    <meta property="og:type" content="<%=pages[id].og.type %>">
+    <meta property="og:url" content="<%=common.site_url %><%=pages[id].url %>">
+    <meta property="og:title" content="<% if(pages[id].title) { %><%=pages[id].title %><% }else{ %><%=common.page_title %><% } %>">
+    <meta property="og:description" content="<% if(pages[id].description) { %><%=pages[id].description %><% }else{ %><%=common.description %><% } %>">
+    <meta property="og:image" content="<% if(pages[id].og.image) { %><%=pages[id].og.image %><% }else{ %><%=common.og.image %><% } %>">
+
+    <meta name="twitter:card" content="<%=common.twitter.card %>">
+    <meta name="twitter:site" content="<%=common.twitter.site %>">
+    <meta name="twitter:title" content="<% if(pages[id].title) { %><%=pages[id].title %><% }else{ %><%=common.page_title %><% } %>">
+    <meta name="twitter:description" content="<% if(pages[id].description) { %><%=pages[id].description %><% }else{ %><%=common.description %><% } %>">
+    <meta name="twitter:url" content="<%=common.site_url %><%=pages[id].url %>">
+    <meta name="twitter:image" content="<% if(pages[id].og.image) { %><%=pages[id].og.image %><% }else{ %><%=common.og.image %><% } %>">
+
     <script src="<%=pages[id].path %>assets/js/common.js"></script>
+    <link rel="stylesheet" href="<%=pages[id].path %>assets/css/style.css">
 </head>
-<body>
-    <div id="wrapper">
-        <header class="global_header">
-            <h1><a href="<%=pages[id].path %>"><%=common.site_title %></a></h1>
-        </header>
+<body data-pagetype="<%=pages[id].pagetype %>">
